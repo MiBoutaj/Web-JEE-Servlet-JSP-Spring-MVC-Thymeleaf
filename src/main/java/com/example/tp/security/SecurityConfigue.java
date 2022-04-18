@@ -14,15 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfigue extends WebSecurityConfigurerAdapter {
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       PasswordEncoder passwordEncoder = passwordEncoder();
-       String encodePWD = passwordEncoder.encode("1234");
+
+    /*
+        PasswordEncoder passwordEncoder = passwordEncoder();
+        String encodePWD = passwordEncoder.encode("1234");
 
         auth.inMemoryAuthentication()
                 .withUser("user1")
@@ -32,12 +34,19 @@ public class SecurityConfigue extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password(encodePWD)
                 .roles("ADMIN", "USERS");
+
+     */
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("**/admin/**").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("****/user/**").hasAnyRole("USERS");
+        http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         //tout les requete http necessite une authentification
         http.authorizeRequests().anyRequest().authenticated();
+        http.exceptionHandling().accessDeniedPage("/403");
     }
 }
