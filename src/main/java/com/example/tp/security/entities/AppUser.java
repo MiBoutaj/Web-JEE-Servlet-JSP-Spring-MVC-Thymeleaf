@@ -21,6 +21,6 @@ public class AppUser {
     private String password;
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<AppRole> appRoles = new ArrayList<>();
 }

@@ -1,5 +1,7 @@
 package com.example.tp.security;
 
+import com.example.tp.security.service.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigue extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -40,20 +45,16 @@ public class SecurityConfigue extends WebSecurityConfigurerAdapter {
 
      */
 
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        });
+        auth.userDetailsService(userDetailsService);
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("**/admin/**").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("****/user/**").hasAnyRole("USERS");
+        http.authorizeRequests().antMatchers("**/admin/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("****/user/**").hasAuthority("USERS");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         //tout les requete http necessite une authentification
         http.authorizeRequests().anyRequest().authenticated();

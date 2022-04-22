@@ -32,7 +32,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Patients</a>
                     <ul class="dropdown-menu">
 
-                        <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/admin/formPatients}">Nv Patient</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/formPatients}">Nv Patient</a></li>
                         <li><a class="dropdown-item" th:href="@{/user/index}">Recherche</a></li>
                     </ul>
                 </li>
