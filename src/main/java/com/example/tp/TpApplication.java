@@ -22,7 +22,7 @@ public class TpApplication {
     CommandLineRunner commandLineRunner(PatientRepository patientRepository) {
         return args -> {
             for (int i = 0; i < 50; i++) {
-                patientRepository.save(new Patient(null, "Amine", new Date(), false, 122));
+                patientRepository.save(new Patient(null, "Amine", new Date(), false, 122,null));
             }
 
 

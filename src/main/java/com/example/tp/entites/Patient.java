@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -31,4 +32,6 @@ public class Patient {
     private boolean malade;
     @DecimalMin("100")
     private int score;
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
+    private Collection<RendezVous> rendezVous;
 }
