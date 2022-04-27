@@ -19,7 +19,13 @@ public class Medecin {
     private String nom;
     private String email;
     private String specialite;
+    private String imageUrl;
 
-    @OneToMany(mappedBy = "medecin")
+    @OneToMany(mappedBy = "medecin",fetch = FetchType.EAGER)
     private Collection<RendezVous> rendezVous;
+
+    @Override
+    public String toString() {
+        return nom+ " specialite= " + specialite ;
+    }
 }

@@ -38,7 +38,7 @@ public class MedecinController {
     @GetMapping("/admin/formMedecin")
     public String formMedecin(Model model){
         model.addAttribute("medecin",new Medecin());
-        model.addAttribute("specialice",Specialisation);
+        model.addAttribute("specialisation",Specialisation);
         return "formMedecin";    }
 
 
@@ -51,6 +51,8 @@ public class MedecinController {
                        @RequestParam(defaultValue = "0") int page){
         if(bindingResult.hasErrors())
             return "formMedecin";
+
+        System.out.println(medecin.toString());
 
         medcinRepository.save(medecin);
         return "redirect:/user/index?page="+page+"&keyword="+keyword;

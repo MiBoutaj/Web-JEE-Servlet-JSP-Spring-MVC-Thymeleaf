@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -60,7 +62,9 @@ public class SecurityConfigue extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll().and().logout().logoutUrl("/logout");
+                .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true).
+                logoutRequestMatcher(new AntPathRequestMatcher("/logout")).
+                logoutSuccessUrl("/logout?logout").permitAll();
 
         http.exceptionHandling().accessDeniedPage("/403");
     }

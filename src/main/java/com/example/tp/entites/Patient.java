@@ -32,6 +32,11 @@ public class Patient {
     private boolean malade;
     @DecimalMin("100")
     private int score;
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient",fetch = FetchType.EAGER)
     private Collection<RendezVous> rendezVous;
+
+    @Override
+    public String toString() {
+        return nom +" " + dateNaissance +" malade=" + malade ;
+    }
 }

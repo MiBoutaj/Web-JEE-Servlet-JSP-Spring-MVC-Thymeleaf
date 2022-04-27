@@ -12,7 +12,7 @@
 
     <div class="col-md-6 offset-3">
 
-        <form method="post" th:action="@{/admin/saveMedecin}">
+        <form method="post" th:action="@{/admin/saveMedecin}"  th:object="${medecin}">
             <div>
                 <label>Nom</label>
                 <input class="form-control" type="text" name="nom" th:value="${medecin.nom}">
@@ -26,12 +26,16 @@
 
             <div>
                 <label>Specialite</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option th:each="sp:${specialice}"
-                            th:text="${sp}"
-                            th:value="${medecin.specialite}">
-                    </option>
-                </select>
+
+                    <select class="form-control" th:field="*{specialite}" id="specialite">
+                        <option value="0">select option</option>
+                        <option
+                                th:each="specialite : ${specialisation}"
+                                th:value="${specialite}"
+                                th:text="${specialite}"
+                        >
+                        </option>
+                    </select>
             </div>
 
             <button type=" submit
