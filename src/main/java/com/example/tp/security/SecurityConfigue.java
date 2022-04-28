@@ -58,6 +58,9 @@ public class SecurityConfigue extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("**/admin/**").hasAuthority("ADMIN");
         http.authorizeRequests().antMatchers("****/user/**").hasAuthority("USERS");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
+        http.authorizeRequests().antMatchers("/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/Images/**").permitAll();
+        http.authorizeRequests().antMatchers("/js/**").permitAll();
         //tout les requete http necessite une authentification
         http.authorizeRequests().anyRequest().authenticated().and()
                 .formLogin()
