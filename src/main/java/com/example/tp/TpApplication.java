@@ -20,7 +20,7 @@ public class TpApplication {
         SpringApplication.run(TpApplication.class, args);
     }
 
-    //   @Bean
+    //  @Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository) {
         return args -> {
             for (int i = 0; i < 50; i++) {
