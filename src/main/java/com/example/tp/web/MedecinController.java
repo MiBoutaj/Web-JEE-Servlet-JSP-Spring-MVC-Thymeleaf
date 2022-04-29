@@ -35,6 +35,23 @@ public class MedecinController {
     }
 
 
+
+
+    @GetMapping(path = "/user/indexM")
+    public String medecin(Model model,
+                          @RequestParam(name = "page",defaultValue = "0") int page,
+                          @RequestParam(name = "size",defaultValue = "5")  int size,
+                          @RequestParam(name = "keyword",defaultValue = "")  String keyword) {
+        Page<Medecin> pageMedecin = medcinRepository.RechercheMultiCM("%"+keyword+"%",PageRequest.of(page,size));
+        model.addAttribute("pageMedecin", pageMedecin.getContent());
+        model.addAttribute("pages",new int[pageMedecin.getTotalPages()]);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("size",size);
+        return "medecin";
+    }
+
+
     @GetMapping("/admin/formMedecin")
     public String formMedecin(Model model){
         model.addAttribute("medecin",new Medecin());
@@ -55,7 +72,7 @@ public class MedecinController {
         System.out.println(medecin.toString());
 
         medcinRepository.save(medecin);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/indexM?page="+page+"&keyword="+keyword;
     }
 
   /*  @GetMapping("/admin/editPatient")

@@ -11,6 +11,8 @@ import com.example.tp.service.HospitalServiceImpl;
 import com.example.tp.service.IHospitalService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +44,20 @@ public class RendezVousController {
     }
 
 
-    @GetMapping(path = "/user/rendezVous")
-    public String rendezVous(Model model) {
-        return "Ba9i";
-
+    @GetMapping(path = "/user/indexR")
+    public String rendezVous(Model model,
+                          @RequestParam(name = "page",defaultValue = "0") int page,
+                          @RequestParam(name = "size",defaultValue = "5")  int size,
+                          @RequestParam(name = "keyword",defaultValue = "")  String keyword) {
+        Page<RendezVous> pageRendezVous = rendezVousRepository.RechercheMultiCR("%"+keyword+"%", PageRequest.of(page,size));
+        model.addAttribute("pageRendezVous", pageRendezVous.getContent());
+        model.addAttribute("pages",new int[pageRendezVous.getTotalPages()]);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("size",size);
+        return "rendezVous";
     }
+
 
 
     @GetMapping("/admin/formRendezVous")
@@ -74,7 +85,7 @@ public class RendezVousController {
             return "formRendezVous";}
         System.out.println(rendezVous.toString());
         rendezVousRepository.save(rendezVous);
-        return "redirect:/user/index?page=" + page + "&keyword=" + keyword;
+        return "redirect:/user/indexR?page=" + page + "&keyword=" + keyword;
     }
 
 
