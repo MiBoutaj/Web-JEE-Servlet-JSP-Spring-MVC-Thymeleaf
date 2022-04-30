@@ -61,10 +61,12 @@
                         <td th:text="${m.email}"></td>
                         <td th:text="${m.specialite}"></td>
 
-                        <td>
-                            <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        <td  >
+
+                            <a sec:authorize="hasAuthority('ADMIN')"   th:href="@{/admin/editMedecin(id=${m.id},keyword=${keyword},page=${currentPage})}" class="edit" title="Edit" ><i class="material-icons">&#xE254;</i></a>
+                            <a sec:authorize="hasAuthority('ADMIN')" onclick="return confirm('vous sure ???')"
+                               th:href="@{/admin/deleteM(id=${m.id} , keyword=${keyword},page=${currentPage})}"
+                               class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
                     </tbody>

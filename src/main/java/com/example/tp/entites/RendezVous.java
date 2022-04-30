@@ -29,4 +29,10 @@ public class RendezVous {
     private Medecin medecin;
     @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
+
+
+    @Override
+    public String toString() {
+        return   id +" " +date+" "+patient.getNom()+" "+medecin.getNom()  ;
+    }
 }

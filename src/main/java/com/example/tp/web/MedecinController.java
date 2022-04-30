@@ -51,6 +51,12 @@ public class MedecinController {
         return "medecin";
     }
 
+    @GetMapping("/admin/deleteM")
+    public String delete(Long id , String keyword , int page){
+        medcinRepository.deleteById(id);
+        return "redirect:/user/indexM?page="+page+"&keyword="+keyword;
+    }
+
 
     @GetMapping("/admin/formMedecin")
     public String formMedecin(Model model){
@@ -75,18 +81,17 @@ public class MedecinController {
         return "redirect:/user/indexM?page="+page+"&keyword="+keyword;
     }
 
-  /*  @GetMapping("/admin/editPatient")
+    @GetMapping("/admin/editMedecin")
     public String editPatient(Model model,Long id,String keyword ,int page){
-        Patient patient = patientRepository.findById(id).orElse(null);
-        if (patient==null)
-            throw  new RuntimeException("patient introvable");
-        model.addAttribute("patient",patient);
+        Medecin medecin = medcinRepository.findById(id).orElse(null);
+        if (medecin==null)
+            throw  new RuntimeException("medecin introvable");
+        model.addAttribute("medecin",medecin);
+        model.addAttribute("specialisation",Specialisation);
         model.addAttribute("page",page);
         model.addAttribute("keyword",keyword);
-        return "editPatient";
+        return "editMedecin";
 
     }
-
- */
 
 }

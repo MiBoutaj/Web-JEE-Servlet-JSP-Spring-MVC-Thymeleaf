@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-public class PatientControlleur {
+public class PatientController {
 
 
     private PatientRepository patientRepository;
@@ -47,7 +47,7 @@ public class PatientControlleur {
 
     @GetMapping("/")
     public String home(){
-        return "home";
+        return "redirect:/user/index";
     }
 
     @GetMapping("/user/patients")
@@ -72,6 +72,8 @@ public class PatientControlleur {
                        @RequestParam(defaultValue = "0") int page){
         if(bindingResult.hasErrors())
             return "formPatients";
+
+        System.out.println("*****************************************************"+patient.getId());
 
         patientRepository.save(patient);
         return "redirect:/user/index?page="+page+"&keyword="+keyword;

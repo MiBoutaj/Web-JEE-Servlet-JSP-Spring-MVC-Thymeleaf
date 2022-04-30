@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface PatientRepository extends JpaRepository<Patient,Long> {
     Page<Patient> findByNomContains(String kw , Pageable pageable);
 
-    @Query(value = "SELECT * FROM patient WHERE patient.nom like :u " , nativeQuery = true)
+    @Query(value = "SELECT * FROM patient WHERE patient.nom like :u or patient.score like :u or patient.malade like :u or patient.date_naissance like :u " , nativeQuery = true)
     Page<Patient>  RechercheMultiCP(@Param("u") String u,Pageable pageable);
 
 

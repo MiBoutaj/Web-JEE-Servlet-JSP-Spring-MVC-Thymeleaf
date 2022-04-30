@@ -59,6 +59,12 @@ public class RendezVousController {
     }
 
 
+    @GetMapping("/admin/deleteR")
+    public String delete(Long id , String keyword , int page){
+        rendezVousRepository.deleteById(id);
+        return "redirect:/user/indexR?page="+page+"&keyword="+keyword;
+    }
+
 
     @GetMapping("/admin/formRendezVous")
     public String formRendezVous(Model model) {
@@ -80,13 +86,42 @@ public class RendezVousController {
                        @RequestParam(defaultValue = "0") int page) {
         System.out.println(rendezVous.toString());
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             System.out.println(bindingResult);
-            return "formRendezVous";}
+            return "formRendezVous";
+        }
         System.out.println(rendezVous.toString());
         rendezVousRepository.save(rendezVous);
         return "redirect:/user/indexR?page=" + page + "&keyword=" + keyword;
+
+
     }
+
+
+
+        @GetMapping("/admin/editRendezVous")
+        public String editRendezVous(Model model,Long id,String keyword ,int page){
+            RendezVous rendezVous = rendezVousRepository.findById(id).orElse(null);
+            if (rendezVous==null)
+                throw  new RuntimeException("rendezVous introvable");
+            model.addAttribute("rendezVous",rendezVous);
+            List<Patient> patientList = patientRepository.findAll();
+            List<Medecin> medecinList = medcinRepository.findAll();
+            model.addAttribute("patientList", patientList);
+            model.addAttribute("medecinList", medecinList);
+            model.addAttribute("Status", Status);
+            model.addAttribute("page",page);
+            model.addAttribute("keyword",keyword);
+            return "editRendezVous";
+
+        }
+
+
+
+
+
+
+
 
 
 }

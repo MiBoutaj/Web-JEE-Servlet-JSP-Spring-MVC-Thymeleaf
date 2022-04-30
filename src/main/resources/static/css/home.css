@@ -7,18 +7,27 @@
 }
 body{
   height: 100vh;
-
+    text-align: center;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
+
 .container{
 
-    margin-top: 10px;
+    margin-top: 20px;
   max-width: 700px;
   width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+.container.row{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left:auto;
+    margin-right:auto;
 }
 .container .title{
   font-size: 25px;
@@ -45,17 +54,23 @@ form .user-details .input-box{
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
+
+form .user-details .input-box1{
+    margin-bottom: 15px;
+    width: 100%;
+
+}
+.user-details .input-box1 textarea{
+
+     width: 100%;
+
+ }
 form .input-box span.details{
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
 
-form .input-box1 span.details{
-    display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
-}
 .user-details .input-box input{
   height: 45px;
   width: 100%;
@@ -67,15 +82,10 @@ form .input-box1 span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
-form .user-details .input-box1{
-    margin-bottom: 15px;
-    width: 100%;
 
-}
-.user-details .input-box1 textarea{
-
+.user-details .input-box textarea{
+    height: 85px;
     width: 100%;
-    height: 75px;
     outline: none;
     font-size: 16px;
     border-radius: 5px;
@@ -83,7 +93,23 @@ form .user-details .input-box1{
     border: 1px solid #ccc;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
+}
+.amine{
+    background-color: #03A9F4;
+}
 
+.amine textarea{
+    height: 85px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
 }
 
 .user-details .input-box select{
@@ -97,18 +123,15 @@ form .user-details .input-box1{
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
-
-.user-details .input-box1 textarea:focus,
-.user-details .input-box1 textarea:valid {
-    border-color: #9b59b6;
-}
-
-
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
     border-color: #9b59b6;
 }
 
+.user-details .input-box textarea:focus,
+.user-details .input-box textarea:valid{
+    border-color: #9b59b6;
+}
 
 .user-details .input-box select:focus,
 .user-details .input-box select:valid{

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Rendez-Vous</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
+</head>
+<body>
+<div layout:fragment="content1">
+
+  <!--  <div class="col-md-6 offset-3">
+        <form method="post" th:action="@{/admin/saveRendezVous}" th:object="${rendezVous}">
+
+            <div>
+                <label>Date </label>
+                <input class="form-control" type="date" id="date" name="date" th:value="${rendezVous.date}">
+                <span class="text-danger" th:errors="${rendezVous.date}"></span>
+            </div>
+
+            <div>
+                <label>Status</label>
+                <select class="form-control" th:field="*{status}" id="status">
+                    <option value="0">select option</option>
+                    <option
+                            th:each="status : ${Status}"
+                            th:value="${status}"
+                            th:text="${status}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Patient</label>
+                <select class="form-control" th:field="*{patient}" id="patient">
+                    <option value="0">select option</option>
+                    <option
+                            th:each="patient : ${patientList}"
+                            th:value="${patient.getId()}"
+                            th:text="${patient.toString()}"
+                    >
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Medcin</label>
+                <select class="form-control" th:field="*{medecin}" id="medecin">
+                    <option value="0">select option</option>
+                    <option
+                            th:each="medecin : ${medecinList}"
+                            th:value="${medecin.getId()}"
+                            th:text="${medecin.toString()}"
+                    >
+                    </option>
+                </select>
+            </div>
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div> -->
+
+
+    <div class="title">Registration Rendez-Vous</div>
+    <div class="content">
+        <form method="post" th:action="@{/admin/saveC}" th:object="${consultaion}" >
+            <div class="user-details">
+
+
+                <div class="input-box">
+                   <span class="details">Rendez-Vous</span>
+                    <select class="form-control"  id="rdv">
+                        <option value="0">select option</option>
+                        <option
+                                th:each="rd:${listeRDV}"
+                                th:value="${rd}"
+                                th:text="${rd.toString()}"
+                        >
+                        </option>
+                    </select>
+                </div>
+                <div class="input-box1">
+                        <span class="details">Rapport</span>
+                       <textarea class="form-control"   id="rapport" name="rapport" th:value="${consultaion.rapport}" ></textarea>
+                        <span class="text-danger" th:errors="${consultaion.rapport}"></span>
+                </div>
+
+
+
+            </div>
+
+            <div class="button">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
